@@ -1,30 +1,23 @@
-version: "3.8"
-
 services:
   quote-engine:
     build: .
     restart: unless-stopped
-
     ports:
       - "5000"
-
     environment:
       FLASK_ENV: production
       FLASK_DEBUG: "False"
-      PRUSA_SLICER_PATH: /usr/local/bin/prusa-slicer
+      PRUSA_SLICER_PATH: /usr/bin/prusa-slicer
       SECRET_KEY: ${SECRET_KEY}
-
     volumes:
       - ./config.json:/app/config.json
       - ./logs:/app/logs
-
     healthcheck:
       test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000/api/config', timeout=5)"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
-
     networks:
       - dokploy-network
 
