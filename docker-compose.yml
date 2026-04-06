@@ -16,9 +16,6 @@ services:
       - ./config.json:/app/config.json
       - ./logs:/app/logs
 
-    # 🔥 TEMPORAR scoatem healthcheck complet
-    # (după ce merge site-ul îl putem adăuga înapoi)
-
     networks:
       - dokploy-network
 
